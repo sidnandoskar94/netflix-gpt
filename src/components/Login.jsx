@@ -1,13 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import Header from "./Header";
 import UserForm from "./UserForm";
 
 const Login = () => {
-    const navigate = useNavigate();
     const { signIn, loading, error: authError } = useAuth();
     const handleLogin = (email, password) => {
-        signIn(email, password).then(() => navigate('/browse'));
+        signIn(email, password).then();
     }
 
     return (

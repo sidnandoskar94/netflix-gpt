@@ -47,9 +47,10 @@ class FirebaseAuthService extends AuthServiceInterface {
         throw new Error("getCurrentUser method must be implemented");
     }
 
-    async updateUserProfile(userName, profileURL) {
-        return updateProfile(this.auth.currentUser, { displayName: userName, photoURL: profileURL }).then(() => {
-            return this.getCurrentUser();
+    async updateUserProfile(user, userName, profileURL) {
+        return updateProfile(user, { displayName: userName, photoURL: profileURL }).then(() => {
+            console.log('Profile updated!');
+
         }).catch((error) => {
             throw error;
         });

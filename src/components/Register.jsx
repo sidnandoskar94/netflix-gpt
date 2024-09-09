@@ -1,19 +1,18 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { checkValidData } from "../utils/validate";
 import Header from "./Header";
 import UserForm from "./UserForm";
 
 const Register = () => {
-    const navigate = useNavigate();
     const { signUp, loading, error: authError } = useAuth();
     const [formError, setFormError] = useState({ error: false });
 
     const handleRegister = (email, password) => {
         const validation = checkValidData(email, password);
         if (!validation.error) {
-            signUp(email, password).then(() => navigate('/browse'));
+            signUp(email, password).then();
         }
         setFormError(validation);
     }

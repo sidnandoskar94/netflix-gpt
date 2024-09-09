@@ -4,8 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { firebaseAuth } from "../config/firebase";
 import auth from '../service/auth/Auth';
 import { loginUser, logoutUser } from '../store/userSlice';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const useAuth = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
     const storeUser = useSelector(store => store.user)
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
@@ -16,14 +19,18 @@ const useAuth = () => {
             if (user) {
                 dispatch(loginUser({ uid: user.uid, displayName: user.displayName, photoURL: user.photoURL, email: user.email }));
                 console.log("UserData: ", user);
+                navigate("/browse");
             } else {
                 dispatch(logoutUser());
                 console.log("User signed out!");
+                if (location.pathname !== '/register') {
+                    navigate("/")
+                }
             }
         });
 
         return () => unsubscribe();
-    }, [dispatch]);
+    }, []);
 
     const signUp = (email, password) => {
         setLoading(true);
@@ -31,11 +38,11 @@ const useAuth = () => {
         return auth.signUp(email, password)
             .then((user) => {
                 const userName = email.split('@')[0];
-                const photUrl = 'https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png';
-                auth.updateUserProfile(userName, photUrl)
+                const photoUrl = 'https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png';
+                auth.updateUserProfile(user, userName, photoUrl)
                     .then(() => {
-                        console.log(userName, photUrl);
-                        dispatch(loginUser({ ...storeUser, displayName: email, photoURL: user.password }))
+                        dispatch(loginUser({ uid: user.uid, displayName: userName, photoURL: photoUrl, email: user.email }));
+                        console.log("User profile updated!");
                     })
                     .catch(setError)
                     .finally(() => setLoading(false));

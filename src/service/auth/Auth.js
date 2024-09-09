@@ -23,8 +23,8 @@ class Auth {
         return this.authService.getCurrentUser();
     }
 
-    updateUserProfile(name, profileURL) {
-        return this.authService.updateUserProfile(name, profileURL);
+    updateUserProfile(user, name, profileURL) {
+        return this.authService.updateUserProfile(user, name, profileURL);
     }
 }
 
