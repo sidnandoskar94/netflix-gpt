@@ -1,6 +1,6 @@
 import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { firebaseAuth } from "../config/firebase";
 import auth from '../service/auth/Auth';
 import { loginUser, logoutUser } from '../store/userSlice';
@@ -9,8 +9,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 const useAuth = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const storeUser = useSelector(store => store.user)
+
     const dispatch = useDispatch();
+
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -56,7 +57,7 @@ const useAuth = () => {
         setLoading(true);
         setError(null);
         return auth.signIn(email, password)
-            .then((user) => true)
+            .then(() => true)
             .catch(setError)
             .finally(() => setLoading(false));
     };

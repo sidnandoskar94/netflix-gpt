@@ -1,7 +1,6 @@
 // FirebaseAuthService.js
 import { AuthServiceInterface } from './AuthServiceInterface';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
-
 import { firebaseAuth, app, analytics } from '../../config/firebase';
 
 class FirebaseAuthService extends AuthServiceInterface {
@@ -58,6 +57,5 @@ class FirebaseAuthService extends AuthServiceInterface {
     }
 }
 
-// Export the service instance
 const firebaseAuthService = new FirebaseAuthService();
 export default firebaseAuthService;
