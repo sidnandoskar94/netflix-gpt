@@ -1,8 +1,13 @@
+import { Provider } from 'react-redux'
 import './App.css'
+import { Body } from './components'
+import store from './store/store'
 
 function App() {
   return (
-    <h1>Hello world</h1>
+    <Provider store={store}>
+      <Body />
+    </Provider>
   )
 }
 
