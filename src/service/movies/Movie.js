@@ -5,8 +5,8 @@ class Movies {
         this.movieService = movieService;
     }
 
-    getPopularMovies() {
-        return this.movieService.getPopularMovies();
+    getMovies(movieCategory = 'now_playing') {
+        return this.movieService.getMovies(movieCategory);
     }
 
     searchMovies(query) {

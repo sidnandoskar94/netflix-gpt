@@ -2,9 +2,9 @@ import { MovieServiceInterface } from './MovieServiceInterface';
 import { tmdb } from '../../config/tmdb';
 
 class TMDBMovieService extends MovieServiceInterface {
-    async getPopularMovies() {
+    async getMovies(movieCategory) {
         try {
-            const response = await tmdb.get('/movie/now_playing', {
+            const response = await tmdb.get(`/movie/${movieCategory}`, {
                 params: {
                     language: 'en-US',
                     page: 1,
@@ -12,7 +12,7 @@ class TMDBMovieService extends MovieServiceInterface {
             });
             return response.data.results;
         } catch (error) {
-            console.error("TMDBService :: getPopularMovies :: error", error);
+            console.error("TMDBService :: getMovies :: error", error);
             throw error;
         }
     }

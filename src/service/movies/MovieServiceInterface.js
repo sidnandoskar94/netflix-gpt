@@ -1,5 +1,5 @@
 export class MovieServiceInterface {
-    async getPopularMovies() {
+    async getMovies(movieCategory) {
         throw new Error("getPopularMovies method must be implemented");
     }
 

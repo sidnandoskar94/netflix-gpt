@@ -9,9 +9,9 @@ const useMovies = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        async function fetchPopularMovies() {
+        async function fetchMovies() {
             try {
-                const response = await movies.getPopularMovies();
+                const response = await movies.getMovies();
                 dispatch(addPopularMovies(response))
             } catch (err) {
                 setError(err);
@@ -19,7 +19,7 @@ const useMovies = () => {
                 setLoading(false);
             }
         }
-        fetchPopularMovies();
+        fetchMovies();
     }, []);
 
     return { loading, error };
