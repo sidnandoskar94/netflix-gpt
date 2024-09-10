@@ -8,9 +8,12 @@ const useMovieTrailer = (movieId) => {
     const fetchMovieVideos = async (id) => {
         try {
             const movieVideosData = await movies.getMovieVideos(id);
-            const trailers = movieVideosData?.results?.filter((video) => video.type === "Trailer");
-            const trailer = trailers?.length > 0 ? trailers[0] : movieVideosData?.results[0];
-            setTrailer(trailer)
+            if (movieVideosData?.results?.length > 0) {
+                const trailers = movieVideosData?.results?.filter((video) => video.type === "Trailer");
+                const trailer = trailers?.length > 0 ? trailers[Math.floor(Math.random() * trailers.length)] : movieVideosData?.results[0];
+                setTrailer(trailer)
+            }
+
 
         } catch (e) {
             console.error(e);

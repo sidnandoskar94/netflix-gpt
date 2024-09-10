@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import movies from '../service/movies/Movie';
 import { useDispatch } from 'react-redux';
-import { addPopularMovies } from '../store/moviesSlice';
+import { addMovies } from '../store/moviesSlice';
 
 const useMovies = () => {
     const dispatch = useDispatch();
@@ -11,8 +11,18 @@ const useMovies = () => {
     useEffect(() => {
         async function fetchMovies() {
             try {
-                const response = await movies.getMovies();
-                dispatch(addPopularMovies(response))
+                const movieCategories = [
+                    { type: 'nowPlaying', fetch: movies.getMovies() },
+                    { type: 'popular', fetch: movies.getMovies('popular') },
+                    { type: 'topRated', fetch: movies.getMovies('top_rated') },
+                    { type: 'upcoming', fetch: movies.getMovies('upcoming') }
+                ];
+
+                const data = await Promise.all(movieCategories.map(category => category.fetch));
+
+                data.forEach((movies, index) => {
+                    dispatch(addMovies({ type: movieCategories[index].type, movies }));
+                });
             } catch (err) {
                 setError(err);
             } finally {

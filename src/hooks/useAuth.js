@@ -19,7 +19,6 @@ const useAuth = () => {
         const unsubscribe = onAuthStateChanged(firebaseAuth, (user) => {
             if (user) {
                 dispatch(loginUser({ uid: user.uid, displayName: user.displayName, photoURL: user.photoURL, email: user.email }));
-                console.log("UserData: ", user);
                 navigate("/browse");
             } else {
                 dispatch(logoutUser());

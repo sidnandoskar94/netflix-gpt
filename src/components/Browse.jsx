@@ -7,24 +7,23 @@ import SecondaryContainer from "./SecondaryContainer"
 
 const Browse = () => {
     const { loading, error } = useMovies();
-    const movies = useSelector(store => store.movies?.popularMovies);
+    const movies = useSelector(store => store.movies);
+
     let mainMovie = [];
-    let secondaryMovie = [];
-    if (movies?.length > 0) {
-        mainMovie = movies.slice(0, 1);
-        secondaryMovie = movies.slice(1);
+    if (movies?.nowPlaying?.length > 0) {
+        mainMovie = movies?.nowPlaying?.slice(0, 1);
     }
 
     return (
-        <>
+        <div className="bg-black">
             <Header />
             {loading && <p>Loading....</p>}
             {error && <p>Error: {error.message}</p>}
-            {!loading && movies?.length > 0 && <>
+            {!loading && Object.keys(movies).length > 0 > 0 && <>
                 <MainContainer movies={mainMovie} />
-                <SecondaryContainer movies={secondaryMovie} />
+                <SecondaryContainer movies={movies} />
             </>}
-        </>
+        </div>
     )
 }
 

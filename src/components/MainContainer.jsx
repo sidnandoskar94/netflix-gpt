@@ -3,8 +3,8 @@ import VideoBanner from "./VideoBanner";
 
 const MainContainer = ({ movies }) => {
     const mainMovie = movies?.length > 0 ? movies[0] : null;
+    console.log("main", mainMovie);
     if (!mainMovie) return null;
-    console.log('mainMovie', mainMovie);
 
     return (
         <div className="relative overflow-hidden">
