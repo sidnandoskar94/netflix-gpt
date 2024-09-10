@@ -11,7 +11,7 @@ const Browse = () => {
 
     let mainMovie = [];
     if (movies?.nowPlaying?.length > 0) {
-        mainMovie = movies?.nowPlaying?.slice(0, 1);
+        mainMovie = movies?.nowPlaying[Math.floor(Math.random() * movies?.nowPlaying?.length)];
     }
 
     return (

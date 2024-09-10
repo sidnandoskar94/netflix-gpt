@@ -1,8 +1,6 @@
 import MovieCard from "./MovieCard";
 
 const MovieList = ({ title, movies, className = '' }) => {
-    console.log(movies);
-
     if (movies?.length <= 0) return null;
 
     return (
