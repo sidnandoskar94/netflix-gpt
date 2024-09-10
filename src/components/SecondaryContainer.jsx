@@ -1,4 +1,7 @@
+import { useSelector } from "react-redux";
 import MovieList from "./MovieList";
+import { shuffle } from 'lodash';
+import React from "react";
 
 const getCategoryTitle = (category) => {
     switch (category) {
@@ -15,7 +18,8 @@ const getCategoryTitle = (category) => {
     }
 }
 
-const SecondaryContainer = ({ movies = {} }) => {
+const SecondaryContainer = () => {
+    const movies = useSelector(store => store.movies);
     return (
         <>
             {Object.entries(movies).map(([category, movieList]) => {
@@ -25,7 +29,7 @@ const SecondaryContainer = ({ movies = {} }) => {
                         key={category}
                         className={className}
                         title={getCategoryTitle(category)}
-                        movies={movieList}
+                        movies={shuffle(movieList)}
                     />
                 );
             })}
@@ -33,4 +37,4 @@ const SecondaryContainer = ({ movies = {} }) => {
     );
 };
 
-export default SecondaryContainer;
+export default React.memo(SecondaryContainer);

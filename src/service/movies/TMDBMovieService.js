@@ -8,6 +8,7 @@ class TMDBMovieService extends MovieServiceInterface {
                 params: {
                     language: 'en-US',
                     page: 1,
+                    adult: true,
                 },
             });
             return response.data.results;

@@ -2,27 +2,24 @@ import { useSelector } from "react-redux"
 import { Header } from "."
 import useMovies from "../hooks/useMovies"
 import MainContainer from "./MainContainer"
+import SearchResults from "./SearchResults"
 import SecondaryContainer from "./SecondaryContainer"
 
 
 const Browse = () => {
     const { loading, error } = useMovies();
-    const movies = useSelector(store => store.movies);
-
-    let mainMovie = [];
-    if (movies?.nowPlaying?.length > 0) {
-        mainMovie = movies?.nowPlaying[Math.floor(Math.random() * movies?.nowPlaying?.length)];
-    }
+    const searchValue = useSelector(store => store.search);
 
     return (
-        <div className="bg-black">
+        <div className="bg-neutral-900 min-h-screen">
             <Header />
             {loading && <p>Loading....</p>}
             {error && <p>Error: {error.message}</p>}
-            {!loading && Object.keys(movies).length > 0 > 0 && <>
-                <MainContainer movies={mainMovie} />
-                <SecondaryContainer movies={movies} />
+            {(!loading && !searchValue) && <>
+                <MainContainer />
+                <SecondaryContainer />
             </>}
+            {searchValue && <SearchResults />}
         </div>
     )
 }
