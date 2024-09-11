@@ -31,7 +31,8 @@ const Register = () => {
                 bg-black 
                 bg-opacity-80
                 max-w-full
-                w-1/3
+                w-[90%]
+                md:w-1/3
                 h-min
                 -translate-x-1/2
                 -translate-y-1/2
