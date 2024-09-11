@@ -8,7 +8,8 @@
         "build": "vite build",
         "lint": "eslint .",
         "preview": "vite preview",
-        "test": "jest"
+        "test": "jest",
+        "test:coverage": "jest --coverage"
     },
     "dependencies": {
         "@tailwindcss/line-clamp": "^0.4.4",
@@ -23,9 +24,11 @@
     "devDependencies": {
         "@babel/core": "^7.25.2",
         "@babel/preset-env": "^7.25.4",
+        "@babel/preset-react": "^7.24.7",
         "@eslint/js": "^9.9.0",
         "@reduxjs/toolkit": "^2.2.7",
         "@testing-library/dom": "^10.4.0",
+        "@testing-library/jest-dom": "^6.5.0",
         "@testing-library/react": "^16.0.1",
         "@types/react": "^18.3.3",
         "@types/react-dom": "^18.3.0",
