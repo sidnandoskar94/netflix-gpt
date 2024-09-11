@@ -9,6 +9,7 @@ const useMovies = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        setLoading(true);
         async function fetchMovies() {
             try {
                 const movieCategories = [

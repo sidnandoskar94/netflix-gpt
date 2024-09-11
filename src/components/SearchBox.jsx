@@ -1,17 +1,30 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateSearch } from '../store/searchSlice';
+import gpt from '../service/gpt/gpt';
+import { updateSearch, updateResult, updateLoadingStatus } from '../store/searchSlice';
 
 const SearchBox = () => {
+    const { searchTerm } = useSelector(store => store.search);
+    const searchInput = useRef(searchTerm);
     const [toggleSearch, setToggleSearch] = useState(false);
     const dispatch = useDispatch();
-    const searchValue = useSelector(store => store.search);
+
+    const fetchSearch = async (searchQuery) => {
+        dispatch(updateLoadingStatus(true));
+        const gptResp = await gpt.getChatCompletion(searchQuery.trim());
+        const movieList = gptResp?.choices[0].message?.content.split(",");
+        console.log(movieList);
+        dispatch(updateResult(movieList));
+        dispatch(updateLoadingStatus(false));
+    }
 
     const handleBtnClick = () => {
         setToggleSearch(prev => !prev)
-    }
-    const handleSearchChange = (e) => {
-        dispatch(updateSearch(e.target.value));
+        const searchQuery = searchInput?.current?.value;
+        if (toggleSearch && searchQuery?.trim() !== '') {
+            dispatch(updateSearch(searchQuery));
+            fetchSearch(searchQuery);
+        }
     }
 
     return (
@@ -30,8 +43,7 @@ const SearchBox = () => {
                     border-white'
                 type='text'
                 placeholder='Search...'
-                value={searchValue || ''}
-                onChange={handleSearchChange}
+                ref={searchInput}
             />}
             <button
                 className='search-box__btn 

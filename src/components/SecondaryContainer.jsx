@@ -22,8 +22,8 @@ const SecondaryContainer = () => {
     const movies = useSelector(store => store.movies);
     return (
         <>
-            {Object.entries(movies).map(([category, movieList]) => {
-                const className = `now-playing relative mb-16 last:mb-0 ${category === 'nowPlaying' ? '-mt-52' : ''}`;
+            {Object.entries(movies).map(([category, movieList], index) => {
+                const className = `${index === 0 ? '-mt-52' : ''}`;
                 return (
                     <MovieList
                         key={category}

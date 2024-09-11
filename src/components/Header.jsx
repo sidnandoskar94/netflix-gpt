@@ -13,7 +13,7 @@ const Header = () => {
         signOut().then()
     }
     return (
-        <div className="absolute flex justify-between w-full px-6 py-4 pb-10 bg-gradient-to-b from-black z-10">
+        <div className="fixed top-0 flex justify-between w-full px-6 py-4 pb-10 bg-gradient-to-b from-black z-10">
             <h1 className="w-24">
                 <Link to="/">
                     <img src={logo} alt="Logo" />

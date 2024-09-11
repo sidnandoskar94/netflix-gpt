@@ -26,7 +26,6 @@ class TMDBMovieService extends MovieServiceInterface {
                     query,
                     language: 'en-US',
                     page: 1,
-                    include_adult: false,
                 },
             });
             return response.data.results;
